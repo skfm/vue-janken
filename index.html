@@ -7,6 +7,14 @@
 </head>
 <body>
   <div id="app">
+    <h1>{{ result }}</h1>
+    <div>
+      <img :src="enemyHandImage">
+    </div>
+
+    <button @click="fight('goo')">ぐー</button>
+    <button @click="fight('choki')">ちょき</button>
+    <button @click="fight('paa')">ぱー</button>
 
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -14,8 +22,36 @@
     new Vue({
       el: '#app',
       data: {
-        
-      }
+        hand: ['goo', 'choki', 'paa'],
+        enemyHand: '',
+        enemyHandImage: '',
+        result: 'いざ勝負!'
+      },
+      methods: {
+        fight: function(myHand) {
+          let index = Math.floor(Math.random() * Math.floor(3));
+          this.enemyHand = this.hand[index];
+
+          if(this.enemyHand === 'goo') {
+            this.enemyHandImage = 'img/goo.jpg';
+          } else if(this.enemyHand === 'choki') {
+            this.enemyHandImage = 'img/choki.jpg';
+          } else {
+            this.enemyHandImage = 'img/paa.jpg';
+          }
+
+          if(myHand === 'goo' && this.enemyHand === 'choki' || 
+             myHand === 'choki' && this.enemyHand === 'paa' || 
+             myHand === 'paa' && this.enemyHand === 'goo'
+            ) {
+              this.result = '勝ち!'
+            } else if(myHand === this.enemyHand) {
+              this.result = '引き分け'
+            } else {
+              this.result = '負け。。'
+            }
+        }
+      },
     })
   </script>
 </body>
