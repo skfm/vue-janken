@@ -8,14 +8,14 @@
 <body>
   <div id="app">
     <h1>{{ result }}</h1>
-    <div v-if="myHand !== ''">
-      あなたの選択は{{ myHand }}
-    </div>
-
+  
     <div>
       <img :src="enemyHandImage">
     </div>
 
+    <div v-if="myHand !==  ''">
+      あなたの選択は{{ myHand }}
+    </div>
     <button @click="fight('goo')">ぐー</button>
     <button @click="fight('choki')">ちょき</button>
     <button @click="fight('paa')">ぱー</button>
