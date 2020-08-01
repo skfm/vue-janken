@@ -8,6 +8,10 @@
 <body>
   <div id="app">
     <h1>{{ result }}</h1>
+    <div v-if="myHand !== ''">
+      あなたの選択は{{ myHand }}
+    </div>
+
     <div>
       <img :src="enemyHandImage">
     </div>
@@ -15,7 +19,6 @@
     <button @click="fight('goo')">ぐー</button>
     <button @click="fight('choki')">ちょき</button>
     <button @click="fight('paa')">ぱー</button>
-
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script>
@@ -25,12 +28,21 @@
         hand: ['goo', 'choki', 'paa'],
         enemyHand: '',
         enemyHandImage: '',
-        result: 'いざ勝負!'
+        result: 'いざ勝負!',
+        myHand: '',
       },
       methods: {
         fight: function(myHand) {
           let index = Math.floor(Math.random() * Math.floor(3));
           this.enemyHand = this.hand[index];
+
+          if(myHand === 'goo') {
+            this.myHand = 'ぐー';
+          } else if(myHand === 'choki') {
+            this.myHand = 'ちょき';
+          } else {
+            this.myHand = 'ぱー'
+          }
 
           if(this.enemyHand === 'goo') {
             this.enemyHandImage = 'img/goo.jpg';
